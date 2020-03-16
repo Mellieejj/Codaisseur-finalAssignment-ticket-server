@@ -14,7 +14,7 @@ const Event = db.define(
     },
     pictureUrl: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: false
     },
     startingDate: {
       type: Sequelize.DATE,
@@ -26,7 +26,8 @@ const Event = db.define(
     }
   },
   {
-    tableName: "events"
+    tableName: "events",
+    timestamps: false
   }
 );
 

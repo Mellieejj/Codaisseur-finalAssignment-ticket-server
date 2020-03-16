@@ -24,7 +24,11 @@ const User = db.define(
 );
 
 Ticket.belongsTo(User);
+Ticket.belongsTo(Event);
+
 Event.belongsTo(User);
+
 Comment.belongsTo(User);
+Comment.belongsTo(Ticket)
 
 module.exports = User;
