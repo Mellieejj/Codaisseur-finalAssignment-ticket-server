@@ -1,16 +1,17 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Event = require("../events/model");
-const Ticket = require("../tickets/model");
-const Comment = require("../comments/model");
+const Event = require("../event/model");
+const Ticket = require("../ticket/model");
+const Comment = require("../comment/model");
 
 const User = db.define(
   "user",
   {
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     password: {
       type: Sequelize.STRING,
@@ -29,6 +30,6 @@ Ticket.belongsTo(Event);
 Event.belongsTo(User);
 
 Comment.belongsTo(User);
-Comment.belongsTo(Ticket)
+Comment.belongsTo(Ticket);
 
 module.exports = User;
