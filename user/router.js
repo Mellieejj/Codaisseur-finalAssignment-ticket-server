@@ -4,7 +4,7 @@ const { Router } = require("express");
 const router = Router();
 const User = require("./model");
 
-router.post("/user", async (request, response, next) => {
+router.post("/users", async (request, response, next) => {
   try {
     const encrypted = bcrypt.hashSync(request.body.password, 10);
 
