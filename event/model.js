@@ -17,11 +17,11 @@ const Event = db.define(
       allowNull: false
     },
     startingDate: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATEONLY,
       allowNull: false
     },
     endDate: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATEONLY,
       allowNull: false
     }
   },
@@ -30,5 +30,6 @@ const Event = db.define(
     timestamps: false
   }
 );
+
 
 module.exports = Event;
