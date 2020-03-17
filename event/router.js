@@ -29,7 +29,7 @@ router.post("/events", auth, (request, response, next) => {
 });
 
 router.get("/events/:id", (request, response, next) => {
-  console.log("req.params", request.params.id);
+  // console.log("req.params", request.params.id);
   Event.findByPk(request.params.id, {include: Ticket})
     .then(event => {
       if (!event) {

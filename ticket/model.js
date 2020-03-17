@@ -3,8 +3,7 @@ const db = require("../db");
 
 const Ticket = db.define("ticket", {
   pictureUrl: {
-    type: Sequelize.STRING,
-    allowNull: true
+    type: Sequelize.STRING
   },
   price: {
     type: Sequelize.FLOAT,

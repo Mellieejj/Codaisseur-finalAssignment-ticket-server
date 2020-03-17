@@ -3,6 +3,7 @@ const cors = require("cors");
 const userRouter = require("./user/router");
 const authRouter = require("./auth/router");
 const eventRouter = require("./event/router");
+const ticketRouter = require("./ticket/router");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser);
 app.use(authRouter);
 app.use(userRouter);
 app.use(eventRouter);
+app.use(ticketRouter);
 
 const port = 4000;
 
