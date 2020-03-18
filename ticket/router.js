@@ -6,15 +6,14 @@ const auth = require("../auth/middleware");
 const router = Router();
 
 router.get("/tickets", (request, response, next) => {
-  Ticket.findAll({ include: Event })
+  Ticket.findAll()
     .then(ticket => response.json(ticket))
     .catch(next);
 });
 
-
 router.post("/tickets", auth, (request, response, next) => {
   const userId = request.user.id;
-  
+
   const newTicket = {
     description: request.body.description,
     pictureUrl: request.body.pictureUrl,
@@ -29,8 +28,8 @@ router.post("/tickets", auth, (request, response, next) => {
 });
 
 router.get("/tickets/:ticketId", (request, response, next) => {
-  console.log("req.params", request.params.ticketId);
-  Event.findByPk(request.params.ticketId)
+  console.log("req.params", request.params);
+  Ticket.findByPk(request.params.ticketId)
     .then(ticket => {
       if (!ticket) {
         response.status(404).end();
@@ -40,4 +39,5 @@ router.get("/tickets/:ticketId", (request, response, next) => {
     })
     .catch(next);
 });
+
 module.exports = router;
