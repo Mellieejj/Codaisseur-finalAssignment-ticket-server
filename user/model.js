@@ -32,6 +32,7 @@ Event.belongsTo(User);
 Comment.belongsTo(User);
 Comment.belongsTo(Ticket);
 
-Event.hasMany(Ticket)
+Event.hasMany(Ticket);
+Ticket.hasMany(Comment);
 
 module.exports = User;

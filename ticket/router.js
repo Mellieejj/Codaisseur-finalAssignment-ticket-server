@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const Ticket = require("./model");
-const Event = require("../event/model");
+const Comment = require("../comment/model");
 const auth = require("../auth/middleware");
 
 const router = Router();
@@ -29,7 +29,7 @@ router.post("/tickets", auth, (request, response, next) => {
 
 router.get("/tickets/:ticketId", (request, response, next) => {
   console.log("req.params", request.params);
-  Ticket.findByPk(request.params.ticketId)
+  Ticket.findByPk(request.params.ticketId, { include: [Comment] })
     .then(ticket => {
       if (!ticket) {
         response.status(404).end();
