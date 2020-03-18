@@ -45,7 +45,7 @@ router.post("/login", (request, response, next) => {
 
 router.get("/secret-endpoint", auth, (request, response, next) => {
   response.send({
-    message: `Thanks for visting the secret endpoint ${request.user.email}. `
+    message: `Thanks for visting the secret endpoint ${request.user.name}. `
   });
 });
 
