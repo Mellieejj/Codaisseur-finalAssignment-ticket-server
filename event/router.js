@@ -28,9 +28,9 @@ router.post("/events", auth, (request, response, next) => {
     .catch(next);
 });
 
-router.get("/events/:id", (request, response, next) => {
-  // console.log("req.params", request.params.id);
-  Event.findByPk(request.params.id, {include: Ticket})
+router.get("/events/:eventId", (request, response, next) => {
+  console.log("req.params", request.params.eventId);
+  Event.findByPk(request.params.eventId, {include: Ticket})
     .then(event => {
       if (!event) {
         response.status(404).end();
