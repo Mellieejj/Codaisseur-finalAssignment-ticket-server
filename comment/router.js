@@ -19,4 +19,9 @@ router.post("/comments", auth, (request, response, next) => {
     .catch(next);
 });
 
+router.get("/comments", (request, response, next) => {
+  Comment.findAll()
+    .then(comments => response.json(comments))
+    .catch(next);
+});
 module.exports = router;
