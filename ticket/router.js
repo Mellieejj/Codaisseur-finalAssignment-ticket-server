@@ -60,7 +60,11 @@ router.put("/tickets/:ticketId", auth, (request, response, next) => {
             .then(ticket => response.status(200).json(ticket));
         }
       } else {
-        return response.status(404).send("ticket does not exist or wrong user");
+        return response
+          .status(404)
+          .send({
+            message: "You are not the owner of this ticket, you can NOT edit!"
+          });
       }
     })
     .catch(next);
