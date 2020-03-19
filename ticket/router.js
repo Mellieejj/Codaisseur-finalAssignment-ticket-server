@@ -43,35 +43,27 @@ router.post("/tickets", auth, async (request, response, next) => {
   }
 });
 
-router.put("/tickets/:ticketId", auth, async (request, response, next) => {
-  try {
-    const updateReqUser = request.user.id;
-
-    console.log("update request", request.user.id);
-
-    const oldTicket = await Ticket.findByPk(request.params.ticketId);
-
-    const updateTicket = {
-      description: request.body.description || oldTicket.description,
-      pictureUrl: request.body.pictureUrl || oldTicket.pictureUrl,
-      price: request.body.price || oldTicket.price,
-      userId: oldTicket.userId,
-      eventId: request.body.eventId
-    };
-    console.log("oldTicket user", oldTicket.userId);
-
-    if (oldTicket.userId === updateReqUser) {
-      const ticket = await oldTicket.update(updateTicket);
-      response.send(ticket);
-    }
-    // else {
-    //   return response.status(400).send({
-    //     message: "Not allowed to change!"
-    //   })
-    // }
-  } catch (error) {
-    next(error);
-  }
+router.put("/tickets/:ticketId", auth, (request, response, next) => {
+  Ticket.findByPk(request.params.ticketId)
+    .then(ticket => {
+      if (ticket && request.user.id === ticket.userId) {
+        if (request.body.description && request.body.price) {
+          const updateTicket = {
+            description: request.body.description,
+            pictureUrl: request.body.pictureUrl,
+            price: request.body.price,
+            userId: request.user.id,
+            eventId: request.body.eventId
+          };
+          return ticket
+            .update(updateTicket)
+            .then(ticket => response.status(200).json(ticket));
+        }
+      } else {
+        return response.status(404).send("ticket does not exist or wrong user");
+      }
+    })
+    .catch(next);
 });
 
 module.exports = router;

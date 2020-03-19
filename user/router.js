@@ -6,18 +6,22 @@ const User = require("./model");
 
 router.post("/users", async (request, response, next) => {
   try {
-    const encrypted = bcrypt.hashSync(request.body.password, 10);
-
-    const user = {
-      name: request.body.name,
-      password: encrypted
-    };
-    console.log(request.body);
-
-    const person = await User.create(user);
-    response.send(person);
+    if (!request.body.name || !request.body.password) {
+      return response
+        .status(400)
+        .send({ message: "Please Supply a valid name and password" });
+    } else {
+      const user = {
+        name: request.body.name,
+        password: bcrypt.hashSync(request.body.password, 10)
+      };
+      const person = await User.create(user);
+      response.json(person);
+    }
   } catch (error) {
-    next(error);
+    response.status(400).send({
+      message: "This username is already in user"
+    });
   }
 });
 
