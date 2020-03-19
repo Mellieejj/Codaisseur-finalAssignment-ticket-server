@@ -16,14 +16,25 @@ router.post("/users", async (request, response, next) => {
         password: bcrypt.hashSync(request.body.password, 10)
       };
       const person = await User.create(user);
-      response.json(person);
+      response.status(200).send(person);
       
     }
   } catch (error) {
     response.status(400).send({
-      message: "This username is already in user"
+      message: "This username is already in use"
     });
   }
 });
 
+router.get("/users", async (request, response, next) => {
+  try{
+    const user = {
+      name: response.body.name
+    }
+    const person = await User.findAll()
+    
+  }catch (error){
+    console.error
+  }
+})
 module.exports = router;
