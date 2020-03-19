@@ -17,6 +17,7 @@ router.post("/users", async (request, response, next) => {
       };
       const person = await User.create(user);
       response.json(person);
+      
     }
   } catch (error) {
     response.status(400).send({
