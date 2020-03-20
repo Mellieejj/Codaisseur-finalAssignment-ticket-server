@@ -31,5 +31,4 @@ const Event = db.define(
   }
 );
 
-
 module.exports = Event;

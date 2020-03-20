@@ -13,7 +13,6 @@ router.get("/tickets", (request, response, next) => {
 });
 
 router.get("/tickets/:ticketId", (request, response, next) => {
-  // console.log("req.params", request.params);
   Ticket.findByPk(request.params.ticketId, { include: [Comment] })
     .then(ticket => {
       if (!ticket) {
@@ -60,11 +59,9 @@ router.put("/tickets/:ticketId", auth, (request, response, next) => {
             .then(ticket => response.status(200).json(ticket));
         }
       } else {
-        return response
-          .status(404)
-          .send({
-            message: "You are not the owner of this ticket, you can NOT edit!"
-          });
+        return response.status(404).send({
+          message: "You are not the owner of this ticket, you can NOT edit!"
+        });
       }
     })
     .catch(next);

@@ -17,7 +17,6 @@ router.post("/users", async (request, response, next) => {
       };
       const person = await User.create(user);
       response.status(200).send(person);
-      
     }
   } catch (error) {
     response.status(400).send({
@@ -27,14 +26,11 @@ router.post("/users", async (request, response, next) => {
 });
 
 router.get("/users", async (request, response, next) => {
-  try{
-    const user = {
-      name: response.body.name
-    }
-    const person = await User.findAll()
-    
-  }catch (error){
-    console.error
+  try {
+    const person = await User.findAll();
+    response.status(200).send(person);
+  } catch (error) {
+    console.error;
   }
-})
+});
 module.exports = router;
