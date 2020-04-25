@@ -6,10 +6,15 @@ const User = require("./model");
 
 router.post("/users", async (request, response, next) => {
   try {
-    if (!request.body.name || !request.body.password) {
+    const password = request.body.password;
+    if (!request.body.name || !password) {
       return response
         .status(400)
         .send({ message: "Please Supply a valid name and password" });
+    } else if (password.length < 8) {
+      return response
+        .status(400)
+        .send({ message: "Password should be at least 8 karakters" });
     } else {
       const user = {
         name: request.body.name,
