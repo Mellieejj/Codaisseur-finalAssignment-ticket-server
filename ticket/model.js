@@ -5,19 +5,19 @@ const Ticket = db.define(
   "ticket",
   {
     pictureUrl: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     price: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: Sequelize.STRING,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
-    tableName: "tickets"
+    tableName: "tickets",
   }
 );
 

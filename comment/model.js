@@ -6,11 +6,11 @@ const Comment = db.define(
   {
     text: {
       type: Sequelize.STRING,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
-    tableName: "comments"
+    tableName: "comments",
   }
 );
 

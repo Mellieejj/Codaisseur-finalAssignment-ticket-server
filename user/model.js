@@ -11,16 +11,16 @@ const User = db.define(
     name: {
       type: Sequelize.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     password: {
       type: Sequelize.STRING,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
-    tableName: "users"
+    tableName: "users",
   }
 );
 

@@ -10,7 +10,7 @@ router.post("/users", async (request, response, next) => {
     if (!request.body.name || !password) {
       return response
         .status(400)
-        .send({ message: "Please Supply a valid name and password" });
+        .send({ message: "Please supply a valid username and password" });
     } else if (password.length < 8) {
       return response
         .status(400)
@@ -18,14 +18,14 @@ router.post("/users", async (request, response, next) => {
     } else {
       const user = {
         name: request.body.name,
-        password: bcrypt.hashSync(request.body.password, 10)
+        password: bcrypt.hashSync(request.body.password, 10),
       };
       const person = await User.create(user);
       response.status(200).send(person);
     }
   } catch (error) {
     response.status(400).send({
-      message: "This username is already in use"
+      message: "This username is already in use",
     });
   }
 });
@@ -38,4 +38,5 @@ router.get("/users", async (request, response, next) => {
     console.error;
   }
 });
+
 module.exports = router;

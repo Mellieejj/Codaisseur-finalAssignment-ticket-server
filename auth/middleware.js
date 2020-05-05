@@ -8,7 +8,7 @@ function auth(request, response, next) {
     try {
       const data = toData(auth[1]);
       User.findByPk(data.userId)
-        .then(user => {
+        .then((user) => {
           if (!user) return next("This user does not exist");
           request.user = user;
           next();
@@ -16,12 +16,12 @@ function auth(request, response, next) {
         .catch(next);
     } catch (error) {
       response.status(400).send({
-        message: `Error ${error.name}: ${error.message}`
+        message: `Error ${error.name}: ${error.message}`,
       });
     }
   } else {
     response.status(401).send({
-      message: "Please supply some valid credentials"
+      message: "Please supply some valid credentials",
     });
   }
 }

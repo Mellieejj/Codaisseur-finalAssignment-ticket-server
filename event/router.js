@@ -15,7 +15,7 @@ router.get("/events", async (request, response, next) => {
   //     .catch(error => next(error))
   // });
   Event.findAll()
-    .then(event => response.json(event))
+    .then((event) => response.json(event))
     .catch(next);
 });
 
@@ -28,17 +28,17 @@ router.post("/events", auth, (request, response, next) => {
     pictureUrl: request.body.pictureUrl,
     startingDate: request.body.startingDate,
     endDate: request.body.endDate,
-    userId: userId
+    userId: userId,
   };
 
   Event.create(newEvent)
-    .then(event => response.json(event))
+    .then((event) => response.json(event))
     .catch(next);
 });
 
 router.get("/events/:eventId", (request, response, next) => {
   Event.findByPk(request.params.eventId, { include: [Ticket] })
-    .then(event => {
+    .then((event) => {
       if (!event) {
         response.status(404).end();
       } else {

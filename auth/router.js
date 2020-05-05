@@ -12,41 +12,41 @@ router.post("/login", (request, response, next) => {
   if (name && password) {
     User.findOne({
       where: {
-        name: name
-      }
+        name: name,
+      },
     })
-      .then(entity => {
+      .then((entity) => {
         if (!entity) {
           response.status(400).send({
-            message: "User with that name does not exist"
+            message: "User with that name does not exist",
           });
         } else if (bcrypt.compareSync(password, entity.password)) {
           response.send({
             jwt: toJWT({ userId: entity.id }),
-            name: entity.name
+            name: entity.name,
           });
         } else {
           response.status(400).send({
-            message: "Password was incorrect"
+            message: "Password was incorrect",
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         response.status(500).send({
-          message: "Something went wrong"
+          message: "Something went wrong",
         });
       });
   } else {
     response.status(400).send({
-      message: "Please fill in a valid name & password"
+      message: "Please fill in a valid name & password",
     });
   }
 });
 
 router.get("/secret-endpoint", auth, (request, response, next) => {
   response.send({
-    message: `Thanks for visting the secret endpoint ${request.user.name}. `
+    message: `Thanks for visting the secret endpoint ${request.user.name}. `,
   });
 });
 

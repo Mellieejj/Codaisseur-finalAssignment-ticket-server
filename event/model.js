@@ -6,28 +6,28 @@ const Event = db.define(
   {
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     pictureUrl: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     startingDate: {
       type: Sequelize.DATEONLY,
-      allowNull: false
+      allowNull: false,
     },
     endDate: {
       type: Sequelize.DATEONLY,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     tableName: "events",
-    timestamps: false
+    timestamps: false,
   }
 );
 
